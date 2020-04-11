@@ -1,8 +1,8 @@
-﻿using GithubRepositoryStatistics.Models;
+﻿using GitHubRepositoryStatistics.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GithubRepositoryStatistics.Services.Abstract
+namespace GitHubRepositoryStatistics.Services.Abstract
 {
     public interface IGetUserRepositoriesStatistics
     {

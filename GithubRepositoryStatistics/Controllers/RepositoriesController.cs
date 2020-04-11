@@ -1,10 +1,10 @@
-﻿using GithubRepositoryStatistics.Models;
-using GithubRepositoryStatistics.Services.Abstract;
+﻿using GitHubRepositoryStatistics.Models;
+using GitHubRepositoryStatistics.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace GithubRepositoryStatistics.Controllers
+namespace GitHubRepositoryStatistics.Controllers
 {
     [ApiController]
     [Route("repositories")]

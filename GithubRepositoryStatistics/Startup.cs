@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GithubRepositoryStatistics.Services;
-using GithubRepositoryStatistics.Services.Abstract;
+using GitHubRepositoryStatistics.Services;
+using GitHubRepositoryStatistics.Services.Abstract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace GithubRepositoryStatistics
+namespace GitHubRepositoryStatistics
 {
     public class Startup
     {

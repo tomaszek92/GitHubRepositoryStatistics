@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GithubRepositoryStatistics.Models.GitHub.Response
+namespace GitHubRepositoryStatistics.Models.GitHub.Response
 {
     public class Respository
     {

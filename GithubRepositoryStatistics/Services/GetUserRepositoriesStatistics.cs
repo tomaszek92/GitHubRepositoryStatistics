@@ -1,12 +1,12 @@
-﻿using GithubRepositoryStatistics.Models;
-using GithubRepositoryStatistics.Services.Abstract;
+﻿using GitHubRepositoryStatistics.Models;
+using GitHubRepositoryStatistics.Services.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GithubRepositoryStatistics.Services
+namespace GitHubRepositoryStatistics.Services
 {
     public class GetUserRepositoriesStatistics : IGetUserRepositoriesStatistics
     {

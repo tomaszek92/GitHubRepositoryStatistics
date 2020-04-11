@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GithubRepositoryStatistics.Services.Abstract;
-using GithubRepositoryStatistics.Models.GitHub.Response;
+using GitHubRepositoryStatistics.Services.Abstract;
+using GitHubRepositoryStatistics.Models.GitHub.Response;
 
-namespace GithubRepositoryStatistics.Services
+namespace GitHubRepositoryStatistics.Services
 {
     public class GitHubService : IGitHubService
     {

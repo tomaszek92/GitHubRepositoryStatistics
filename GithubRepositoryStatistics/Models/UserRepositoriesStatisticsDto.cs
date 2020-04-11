@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GithubRepositoryStatistics.Models
+namespace GitHubRepositoryStatistics.Models
 {
     public class UserRepositoriesStatisticsDto
     {
