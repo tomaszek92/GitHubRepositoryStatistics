@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 using System.Net;
+using GitHubRepositoryStatistics.Models.Exceptions;
 
 namespace GitHubRepositoryStatistics.Controllers
 {
@@ -24,7 +25,7 @@ namespace GitHubRepositoryStatistics.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.Data.Contains("StatusCode") && (HttpStatusCode)ex.Data["StatusCode"] == HttpStatusCode.NotFound)
+                if (ex.Data.Contains(HttpRequestExceptionData.StatusCode) && (HttpStatusCode)ex.Data[HttpRequestExceptionData.StatusCode] == HttpStatusCode.NotFound)
                 {
                     return NotFound();
                 }

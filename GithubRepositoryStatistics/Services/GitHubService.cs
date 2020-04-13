@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GitHubRepositoryStatistics.Services.Abstract;
 using GitHubRepositoryStatistics.Models.GitHub.Response;
+using GitHubRepositoryStatistics.Models.Exceptions;
 
 namespace GitHubRepositoryStatistics.Services
 {
@@ -28,7 +29,7 @@ namespace GitHubRepositoryStatistics.Services
             }
             catch (HttpRequestException ex)
             {
-                ex.Data["StatusCode"] = response.StatusCode;
+                ex.Data[HttpRequestExceptionData.StatusCode] = response.StatusCode;
                 throw;
             }
 

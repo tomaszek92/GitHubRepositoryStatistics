@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using FluentAssertions;
+using GitHubRepositoryStatistics.Models.Exceptions;
 using GitHubRepositoryStatistics.Models.GitHub.Response;
 using GitHubRepositoryStatistics.Services;
 using Shouldly;
@@ -62,7 +63,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             var exception = await Assert.ThrowsAsync<HttpRequestException>(async () => await gitHubService.GetRepositoriesAsync(username, CancellationToken.None));
 
             // Assert
-            exception.Data["StatusCode"].ShouldBe(HttpStatusCode.NotFound);
+            exception.Data[HttpRequestExceptionData.StatusCode].ShouldBe(HttpStatusCode.NotFound);
         }
 
         private GitHubService CreateGitHubService(FakeHttpMessageHandler fakeHttpMessageHandler)
