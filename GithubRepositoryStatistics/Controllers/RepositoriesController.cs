@@ -1,8 +1,9 @@
-﻿using GitHubRepositoryStatistics.Models;
-using GitHubRepositoryStatistics.Services.Abstract;
+﻿using GitHubRepositoryStatistics.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
+using System.Net;
 
 namespace GitHubRepositoryStatistics.Controllers
 {
@@ -11,12 +12,24 @@ namespace GitHubRepositoryStatistics.Controllers
     public class RepositoriesController : ControllerBase
     {
         [HttpGet("{owner}")]
-        public async Task<UserRepositoriesStatisticsDto> GetUserRepositoriesStatistics(
+        public async Task<IActionResult> GetUserRepositoriesStatistics(
             string owner,
             CancellationToken cancellationToken,
             [FromServices] IGetUserRepositoriesStatistics getUserRepositoriesStatistics)
         {
-            return await getUserRepositoriesStatistics.ExecuteAsync(owner, cancellationToken);
+            try
+            {
+                var dto = await getUserRepositoriesStatistics.ExecuteAsync(owner, cancellationToken);
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Data.Contains("StatusCode") && (HttpStatusCode)ex.Data["StatusCode"] == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
+                return StatusCode(500);
+            }
         }
     }
 }

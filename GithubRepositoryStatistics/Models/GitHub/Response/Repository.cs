@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GitHubRepositoryStatistics.Models.GitHub.Response
 {
-    public class Respository
+    public class Repository
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }

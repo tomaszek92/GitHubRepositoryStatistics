@@ -7,6 +7,6 @@ namespace GitHubRepositoryStatistics.Services.Abstract
 {
     public interface IGitHubService
     {
-        Task<List<Respository>> GetRepositoriesAsync(string username, CancellationToken cancellationToken);
+        Task<List<Repository>> GetRepositoriesAsync(string username, CancellationToken cancellationToken);
     }
 }

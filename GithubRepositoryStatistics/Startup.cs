@@ -30,7 +30,6 @@ namespace GitHubRepositoryStatistics
             services.AddControllers();
             services.AddHttpClient<IGitHubService, GitHubService>(x =>
             {
-                x.BaseAddress = new Uri("https://api.github.com/");
                 x.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
                 x.DefaultRequestHeaders.Add("User-Agent", "tomaszek92");
             });

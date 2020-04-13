@@ -19,6 +19,11 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
         private readonly IGitHubService _gitHubService;
         private readonly GetUserRepositoriesStatistics _getUserRepositoriesStatistics;
 
+        public static IEnumerable<object[]> AllLettersData =>
+            Enumerable
+                .Range('a', 'z' - 'a' + 1)
+                .Select(letter => new object[] { letter });
+
         public GetUserRepositoriesStatisticsUnitTests()
         {
             _fixture = new Fixture();
@@ -32,7 +37,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             // Arrange
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                .Returns(new List<Respository>());
+                .Returns(new List<Repository>());
 
             // Act
             var dto = await _getUserRepositoriesStatistics.ExecuteAsync(_fixture.Create<string>(), CancellationToken.None);
@@ -47,7 +52,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             // Arrange
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                .Returns(new List<Respository>());
+                .Returns(new List<Repository>());
 
             // Act
             var dto = await _getUserRepositoriesStatistics.ExecuteAsync(_fixture.Create<string>(), CancellationToken.None);
@@ -62,7 +67,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             // Arrange
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                .Returns(new List<Respository>());
+                .Returns(new List<Repository>());
 
             // Act
             var dto = await _getUserRepositoriesStatistics.ExecuteAsync(_fixture.Create<string>(), CancellationToken.None);
@@ -77,7 +82,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             // Arrange
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                .Returns(new List<Respository>());
+                .Returns(new List<Repository>());
 
             // Act
             var dto = await _getUserRepositoriesStatistics.ExecuteAsync(_fixture.Create<string>(), CancellationToken.None);
@@ -86,29 +91,27 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             dto.AvgSize.ShouldBe(0);
         }
 
-        [Fact]
-        public async Task Should_return_each_letter_equals_to_zero_if_repositories_are_empty()
+        [Theory]
+        [MemberData(nameof(AllLettersData))]
+        public async Task Should_return_count_of_letter_equals_to_zero_if_repositories_are_empty(char letter)
         {
             // Arrange
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                .Returns(new List<Respository>());
+                .Returns(new List<Repository>());
 
             // Act
             var dto = await _getUserRepositoriesStatistics.ExecuteAsync(_fixture.Create<string>(), CancellationToken.None);
 
             // Assert
-            for (var letter = 'a'; letter <= 'z'; letter++)
-            {
-                dto.Letters[letter.ToString()].ShouldBe(0);
-            }
+             dto.Letters[letter.ToString()].ShouldBe(0);
         }
 
         [Fact]
         public async Task Should_return_AvgForks_equals_to_average_ForksCount_if_repositories_are_not_empty()
         {
             // Arrange
-            var repositories = _fixture.CreateMany<Respository>().ToList();
+            var repositories = _fixture.CreateMany<Repository>().ToList();
 
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
@@ -127,7 +130,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
         public async Task Should_return_AvgStargazers_equals_to_average_StargazersCount_if_repositories_are_not_empty()
         {
             // Arrange
-            var repositories = _fixture.CreateMany<Respository>().ToList();
+            var repositories = _fixture.CreateMany<Repository>().ToList();
 
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
@@ -146,7 +149,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
         public async Task Should_return_AvgWatchers_equals_to_average_WatchersCount_if_repositories_are_not_empty()
         {
             // Arrange
-            var repositories = _fixture.CreateMany<Respository>().ToList();
+            var repositories = _fixture.CreateMany<Repository>().ToList();
 
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
@@ -165,7 +168,7 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
         public async Task Should_return_AvgSize_equals_to_average_Size_if_repositories_are_not_empty()
         {
             // Arrange
-            var repositories = _fixture.CreateMany<Respository>().ToList();
+            var repositories = _fixture.CreateMany<Repository>().ToList();
 
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
@@ -180,17 +183,12 @@ namespace GitHubRepositoryStatistics.UnitTests.Services
             dto.AvgSize.ShouldBe(expected);
         }
 
-        public static IEnumerable<object[]> AllLettersData => 
-            Enumerable
-                .Range('a', 'z' - 'a' + 1)
-                .Select(letter => new object[] { letter });
-
         [Theory]
         [MemberData(nameof(AllLettersData))]
         public async Task Should_return_count_of_letter_equals_to_count_of_letter_in_repository_names(char letter)
         {
             // Arrange
-            var repositories = _fixture.CreateMany<Respository>().ToList();
+            var repositories = _fixture.CreateMany<Repository>().ToList();
 
             _gitHubService
                 .GetRepositoriesAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
